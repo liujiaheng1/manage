@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <button onclick="go()">开始</button>
+    <button onclick="stop()">暂停</button>
+    <button onclick="back()">重新开始</button>
+    <script>
+        var div_ = document.getElementsByTagName('div')[0];
+
+        var isrun = true;
+        function go() {
+            num = 10;
+            if (isrun) {
+                isrun = false;
+            time = setInterval(function () {
+                
+                div_.innerHTML = num + 's';
+                num--;
+                if (num == -1) {
+                    clearInterval(time);
+                }
+            }, 1000)
+            }
+        }
+        function stop() {
+            clearInterval(time)
+            isrun = true;
+        }
+        function back() {
+            go()
+            num = 10;
+        }
+    </script>
+</body>
+
+</html>

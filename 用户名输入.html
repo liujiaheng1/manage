@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="username">用户名：</label>
+        <input type="text" id="username" value="hello">
+        <span></span>
+    </form>
+    <script>
+        var inp = document.getElementsByTagName('input')[0];
+        var form_ = document.getElementsByTagName('form')[0];
+        var span_ = document.getElementsByTagName('span')[0];
+        inp.addEventListener('blur',function(){
+            inp.value = null;
+            inp.style.color = 'red';
+            span_.innerHTML = '至少6——12位字符'
+        },false)
+    </script>
+</body>
+</html>

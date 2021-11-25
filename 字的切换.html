@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            width: 260px;
+            height: 20px;
+            border: 1px solid black;
+            overflow: hidden;
+            position: relative;
+            margin: 150px auto;
+        }
+
+        ul {
+            list-style: none;
+            position: absolute;
+            top: 0;
+            left: auto;
+        }
+        ul>li{
+            line-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>1.每时每刻，都在给你新的机会</li>
+            <li>2.HTML定义了网页的内容</li>
+            <li>3.css规定了html的样式</li>
+            <li>4.js可以实现后台的交互</li>
+        </ul>
+    </div>
+
+    <script>
+        var list = document.getElementsByTagName('ul')[0];
+        var div_ = document.getElementsByTagName('div')[0];
+        var top_ = div_.clientHeight;
+        var b = list.children.length;
+        var a = top_;
+        go();
+        function go() {
+            timer = setInterval(function go() {
+                a -= top_;
+                list.style.top = a + 'px';
+                if (a == -(b - 1) * top_) {
+                    a = top_;
+                }
+            }, 1000)
+        }
+        list.onmouseover = function () {
+            clearInterval(timer);
+        }
+        list.onmouseout = function () {
+            go()
+        }
+    </script>
+</body>
+
+</html>
