@@ -75,9 +75,9 @@ export default {
             duration: 1000,
             onClose: () => {
               this.$router.push("/home");
-              sessionStorage.setItem("token", res.data.token);
             },
           });
+          sessionStorage.setItem("token", res.data.token);
         })
         .catch((err) => {
           console.log(err);

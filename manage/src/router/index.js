@@ -6,27 +6,27 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
-    redirect:'/login'
+    path: '/',
+    redirect: '/login'
   },
   {
-    path:'/login',
-    component:()=>import('../views/login.vue')
+    path: '/login',
+    component: () => import('../views/login.vue')
   },
   {
-    path:'/home',
-    component:()=>import('../views/home.vue'),
-    children:[
-      {path:'/',redirect:'welcome'},
-      {path:'welcome',component:()=>import('../components/welcome/welcome.vue')},
-      {path:'users',component:()=>import('../components/user/users.vue')},
-      {path:'roles',component:()=>import('../components/quanxian/roles.vue')},
-      {path:'rights',component:()=>import('../components/quanxian/rights.vue')},
-      {path:'goods',component:()=>import('../components/commodity/goods.vue')},
-      {path:'params',component:()=>import('../components/commodity/params.vue')},
-      {path:'categories',component:()=>import('../components/commodity/categories.vue')},
-      {path:'orders',component:()=>import('../components/order/orders.vue')},
-      {path:'reports',component:()=>import('../components/data/reports.vue')},
+    path: '/home',
+    component: () => import('../views/home.vue'),
+    children: [
+      { path: '/', redirect: 'welcome' },
+      { path: 'welcome', component: () => import('../components/welcome/welcome.vue') },
+      { path: 'users', component: () => import('../components/user/users.vue') },
+      { path: 'roles', component: () => import('../components/quanxian/roles.vue') },
+      { path: 'rights', component: () => import('../components/quanxian/rights.vue') },
+      { path: 'goods', component: () => import('../components/commodity/goods.vue') },
+      { path: 'params', component: () => import('../components/commodity/params.vue') },
+      { path: 'categories', component: () => import('../components/commodity/categories.vue') },
+      { path: 'orders', component: () => import('../components/order/orders.vue') },
+      { path: 'reports', component: () => import('../components/data/reports.vue') },
     ]
   }
 ]
