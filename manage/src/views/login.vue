@@ -76,6 +76,7 @@ export default {
               this.$router.push("/home");
             },
           });
+          sessionStorage.setItem("token", res.data.token);
         })
         .catch((err) => {
           console.log(err);

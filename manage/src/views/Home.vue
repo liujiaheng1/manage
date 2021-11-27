@@ -75,7 +75,6 @@ export default {
     http({
       url: "menus",
     }).then((res) => {
-      console.log(res.data);
       this.list = res.data;
     });
   },
