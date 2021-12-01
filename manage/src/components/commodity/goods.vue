@@ -5,13 +5,14 @@
       <span>商品列表</span>
     </p>
     <div class="goodslist">
+      <!-- 查询 -->
       <div class="search">
         <div>
-          <input type="text" placeholder="请输入内容" />
-          <button class="find"></button>
+          <input type="text" placeholder="请输入内容" v-model="find_id" />
+          <button class="find" @click="sea"></button>
           <i class="fa fa-search"></i>
         </div>
-        <button class="add_goods">添加商品</button>
+        <button class="add_goods" @click="add">添加商品</button>
       </div>
     </div>
     <el-table :data="tableData.goods" style="width: 100%">
@@ -64,6 +65,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页器 -->
     <div class="block">
       <el-pagination
         @size-change="handleSizeChange"
@@ -75,6 +77,45 @@
       >
       </el-pagination>
     </div>
+    <!-- 修改商品信息 -->
+    <el-dialog title="修改商品信息" :visible.sync="dialogFormVisible">
+      <el-form label-width="100px" class="demo-ruleForm">
+        <el-form-item label="商品名称">
+          <el-input v-model="addgoods.goods_name"></el-input>
+        </el-form-item>
+        <el-form-item label="商品重量">
+          <el-input v-model="addgoods.goods_weight"></el-input>
+        </el-form-item>
+        <el-form-item label="商品价格">
+          <el-input v-model="addgoods.goods_price"></el-input>
+        </el-form-item>
+        <el-form-item label="商品数量">
+          <el-input v-model="addgoods.goods_number"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm()">立即创建</el-button>
+          <!-- <el-button type="primary" @click="change">立即修改</el-button> -->
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+    <!-- 查询的内容 -->
+    <el-dialog
+      class="message"
+      title="商品详情信息"
+      :visible.sync="dialogFormVisibles"
+    >
+      <div>商品id：{{ find_good.goods_id }}</div>
+      <div>商品名字：{{ find_good.goods_name }}</div>
+      <div>商品价格：{{ find_good.goods_price }}</div>
+      <div>商品重量：{{ find_good.goods_weight }}</div>
+      <div>
+        创建时间：{{
+          new Date(find_good.add_time)
+            .toLocaleString("chinese", { hour12: false })
+            .replaceAll("/", "-")
+        }}
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -88,23 +129,91 @@ export default {
       currentPage: 1,
       pagesize: 10,
       pagenum: 1,
+      dialogFormVisible: false,
+      newId: "",
+      addgoods: {
+        goods_name: "",
+        goods_number: "",
+        goods_price: "",
+        goods_weight: "",
+        goods_id: "",
+        cat_id: "",
+        goods_cat: "",
+      },
+      show_: false,
+      //查询
+      find_id: "",
+      find_good: [],
+      dialogFormVisibles: false,
     };
   },
   methods: {
+    //查询
+    sea() {
+      console.log(this.find_id);
+      this.dialogFormVisibles = true;
+      http({
+        url: `goods/${this.find_id}`,
+      }).then((res) => {
+        console.log(res);
+        this.find_good = res.data;
+        console.log(this.find_good);
+      });
+    },
+    //添加商品
+    add() {
+      this.$router.push("/home/add");
+    },
     //修改
     handleEdit(index, row) {
       console.log(index, row);
+      this.dialogFormVisible = true;
+      this.addgoods.goods_name = row.goods_name;
+      this.newId = Number(row.goods_id);
+      this.addgoods.goods_weight = row.goods_weight;
+      this.addgoods.goods_price = row.goods_price;
+      this.addgoods.goods_number = row.goods_number;
+      this.addgoods.goods_id = row.goods_id;
+      this.addgoods.cat_id = row.cat_id;
+      console.log(row.goods_id);
+      http({
+        url: `goods/${row.goods_id}`,
+      }).then((res) => {
+        console.log(res);
+        this.addgoods.goods_cat = res.data.goods_cat;
+      });
     },
+    //提交
+    submitForm() {
+      this.dialogFormVisible = false;
+      http({
+        url: `goods/${this.addgoods.goods_id}`,
+        method: "put",
+        data: this.addgoods,
+      })
+        .then((res) => {
+          this.$message({
+            type: "success",
+            message: res.meta.msg,
+          });
+        })
+        .then(() => {
+          http({
+            url: `goods?pagenum=${this.currentPage}&pagesize=${this.pagesize}`,
+          }).then((res) => {
+            this.tableData = res.data;
+          });
+        });
+    },
+
     //删除
     handleDelete(index, row) {
-      console.log(index, row);
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          console.log(typeof row.goods_id);
           http({
             url: `goods/${row.goods_id}`,
             method: "delete",
@@ -112,7 +221,6 @@ export default {
             http({
               url: `goods?pagenum=${this.pagenum}&pagesize=${this.pagesize}`,
             }).then((res) => {
-              console.log(res.data);
               this.tableData = res.data;
             });
           });
@@ -136,7 +244,6 @@ export default {
       http({
         url: `goods?pagenum=${val}&pagesize=${this.pagesize}`,
       }).then((res) => {
-        console.log(res.data);
         this.tableData = res.data;
         this.pagenum = Number(res.data.pagenum);
       });
@@ -147,7 +254,6 @@ export default {
     http({
       url: `goods?pagenum=${this.currentPage}&pagesize=${this.pagesize}`,
     }).then((res) => {
-      console.log(res.data.goods.length);
       this.tableData = res.data;
     });
   },
@@ -163,6 +269,11 @@ export default {
     }
     span:nth-child(1) {
       font-weight: bold;
+    }
+  }
+  .message {
+    div {
+      margin: 20px;
     }
   }
   .goodslist {
