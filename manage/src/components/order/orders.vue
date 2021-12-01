@@ -306,6 +306,8 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #eaedf1;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 .card1 {
   margin-top: 17px;

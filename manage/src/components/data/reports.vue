@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <!-- 头部面包屑 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -96,6 +96,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.box {
+  box-sizing: border-box;
+  padding: 0 20px;
+}
 .el-breadcrumb {
   padding-top: 20px;
   padding-left: 20px;
