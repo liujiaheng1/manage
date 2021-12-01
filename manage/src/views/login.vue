@@ -66,8 +66,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          console.log("aaa");
-
+          sessionStorage.setItem("token", res.data.token);
           this.$message({
             showClose: true,
             message: "登录成功",

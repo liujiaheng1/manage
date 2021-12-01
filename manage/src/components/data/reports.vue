@@ -97,6 +97,10 @@ export default {
 
 <style scoped lang="scss">
 .el-breadcrumb {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.el-breadcrumb {
   margin-bottom: 20px;
 }
 </style>

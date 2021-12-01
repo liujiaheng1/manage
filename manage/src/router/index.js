@@ -24,6 +24,7 @@ const routes = [
       { path: 'rights', component: () => import('../components/quanxian/rights.vue') },
       { path: 'goods', component: () => import('../components/commodity/goods.vue') },
       { path: 'params', component: () => import('../components/commodity/params.vue') },
+      { path: 'add', component: () => import('../components/commodity/add.vue') },
       { path: 'categories', component: () => import('../components/commodity/categories.vue') },
       { path: 'orders', component: () => import('../components/order/orders.vue') },
       { path: 'reports', component: () => import('../components/data/reports.vue') },

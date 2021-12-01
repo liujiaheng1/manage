@@ -13,3 +13,13 @@ body,html{
     width: 100%;
     height: 100%;
 }
+.el-main{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .el-table::before{
+      height: 0;
+  }
+.ql-editor{
+    min-height: 300px;
+}

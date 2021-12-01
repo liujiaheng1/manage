@@ -316,4 +316,8 @@ export default {
 .el-cascader {
   width: 100%;
 }
+.el-breadcrumb {
+  padding-top: 20px;
+  padding-left: 20px;
+}
 </style>
