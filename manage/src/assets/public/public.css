@@ -20,3 +20,6 @@ body,html{
   .el-table::before{
       height: 0;
   }
+.ql-editor{
+    min-height: 300px;
+}
