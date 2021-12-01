@@ -1,8 +1,8 @@
 <template>
   <el-container>
     <el-header>
-        <h1>电商后台管理系统</h1>
-        <button @click="back">退出</button>
+      <h1>电商后台管理系统</h1>
+      <button @click="back">退出</button>
     </el-header>
     <el-container>
       <el-aside width="200px" height="100%">
@@ -22,12 +22,13 @@
               <span>{{ item.authName }}</span>
             </template>
             <el-menu-item-group
-              
               v-for="ite in item.children"
               :key="ite.authName"
             >
               <router-link :to="'/home/' + ite.path">
-                <el-menu-item :index="ite.id + ''">{{ ite.authName }}</el-menu-item>
+                <el-menu-item :index="ite.id + ''">{{
+                  ite.authName
+                }}</el-menu-item>
               </router-link>
             </el-menu-item-group>
           </el-submenu>
@@ -65,10 +66,10 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    back(){
-      this.$router.push('/login')
-      sessionStorage.removeItem('token')
-    }
+    back() {
+      this.$router.push("/login");
+      sessionStorage.removeItem("token");
+    },
   },
   components: {},
   mounted() {
@@ -94,10 +95,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    h1{
+    h1 {
       font-size: 20px;
     }
-    button{
+    button {
       width: 50px;
       height: 26px;
       background-color: #909399;
